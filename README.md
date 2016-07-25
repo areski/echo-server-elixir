@@ -1,6 +1,6 @@
-# Echo
+# Echo-Elixir-Server [![Build Status](https://travis-ci.org/areski/echo-server-elixir.svg?branch=master)](https://travis-ci.org/areski/echo-server-elixir)
 
-**TODO: Add description**
+> Simple Echo Elixir Server
 
 ## Installation
 
@@ -18,3 +18,7 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
           [applications: [:echo]]
         end
 
+
+## To Do
+
+- [ ] Nada
