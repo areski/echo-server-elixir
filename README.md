@@ -19,6 +19,15 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
         end
 
 
+## Prepare release
+
+Compile and prepare release:
+
+  MIX_ENV=prod mix compile
+
+  MIX_ENV=prod mix release
+
+
 ## To Do
 
 - [ ] Nada
