@@ -14,8 +14,8 @@ defmodule Echo.Worker do
   end
 
   def parse_message(message) when is_bitstring(message) do
-    IO.puts "handle_message:"
-    IO.inspect message
+    # IO.puts "handle_message:"
+    # IO.inspect message
     case String.split(message) do
       ["SET", key, value] ->
         {:set, key, value}
