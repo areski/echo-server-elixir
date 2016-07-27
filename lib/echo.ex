@@ -6,7 +6,9 @@ defmodule Echo do
 
     children = [
       supervisor(Task.Supervisor, [[name: Echo.TaskSupervisor]]),
-      worker(Task, [Echo.Server, :start, [12321]])
+      worker(Task, [Echo.Server, :start, [12321]]),
+      worker(Redix, [[], [name: :redix]]),
+      # worker(Echo.Storage, [Echo.Storage] )
     ]
 
     opts = [strategy: :one_for_one, name: Echo.Supervisor]

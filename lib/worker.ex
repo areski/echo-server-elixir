@@ -2,15 +2,21 @@ defmodule Echo.Worker do
 
   def handle_message(message) do
     {action, key, value} = parse_message(message)
-    case action do
-      :get ->
-        get_redis(key)
-      :set ->
-        set_redis(key, value)
-      _ ->
-        IO.puts "action not recognized..."
-    end
-    message
+    message =
+      case action do
+        :get ->
+          # Echo.Storage.get(key)
+          {:ok, value} = Redix.command(:redix, ~w(GET #{key}))
+          message <> " -> Got #{key} with value: #{value}"
+        :set ->
+          # Echo.Storage.set(key, value)
+          {:ok, _} = Redix.command(:redix, ~w(SET #{key} #{value}))
+          message <> " -> SET #{key} #{value}"
+        _ ->
+          message <> " -> action not recognized..."
+      end
+    IO.puts message
+    message <> "\n"
   end
 
   def parse_message(message) when is_bitstring(message) do
@@ -29,20 +35,6 @@ defmodule Echo.Worker do
   def parse_message(message) when is_list(message) do
     # closing connection
     {:unknow, nil, nil}
-  end
-
-  defp set_redis(key, value) do
-    {:ok, conn} = Redix.start_link()
-    # Set key value
-    {:ok, _} = Redix.command(conn, ~w(SET #{key} #{value}))
-    IO.puts "set_redis:> #{key}-#{value}"
-  end
-
-  defp get_redis(key) do
-    {:ok, conn} = Redix.start_link()
-    # Get key value
-    {:ok, value} = Redix.command(conn, ~w(GET #{key}))
-    IO.puts "get_redis:> #{value}"
   end
 
 end
