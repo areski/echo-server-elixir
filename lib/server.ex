@@ -21,7 +21,7 @@ defmodule Echo.Server do
       {:ok, "\r\n"} ->
         :gen_tcp.close(client)
       {:ok, message} ->
-        message |> Echo.Reverso.reverso |> send_message(client)
+        message |> Echo.Worker.handle_message |> Echo.Reverso.reverso |> send_message(client)
         read_message(client)
       {:error, _} ->
         :gen_tcp.close(client)

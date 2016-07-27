@@ -20,7 +20,7 @@ defmodule Echo.Mixfile do
   #
   # Type "mix help compile.app" for more information
   def application do
-    [applications: [:logger, :exrm_deb, :swab],
+    [applications: [:logger, :exrm_deb, :swab, :redix],
     mod: {Echo, []}]
   end
 
@@ -29,6 +29,7 @@ defmodule Echo.Mixfile do
       {:ex_doc, "~> 0.13.0", only: :dev},
       {:exrm, "~> 1.0.8"},
       {:exrm_deb, "~> 0.0.6"},
+      {:redix, ">= 0.4.0"},
       {:swab, github: "crownedgrouse/swab", branch: "master"}
     ]
   end
