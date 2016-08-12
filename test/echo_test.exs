@@ -16,8 +16,8 @@ defmodule EchoTest do
 
     case :gen_tcp.recv(socket, 0) do
       {:ok, response} ->
-        # assert response == "Hello, world!\n"
-        assert response == "!dlrow ,olleH\n"
+        assert response == "Hello, world!\n"
+        # assert response == "!dlrow ,olleH\n"
       {:error, reason} ->
         flunk "Did notreceiveresponse: #{reason}"
     end
@@ -35,6 +35,8 @@ defmodule EchoTest do
     case :gen_tcp.recv(socket, 0) do # Socket should be closed
       # {:ok, response} ->
       #   assert response == "\r\n"
+      {:ok, response} ->
+        assert response == "Hello, world!\n"
       {:error, response} ->
         assert response == :closed
     end
